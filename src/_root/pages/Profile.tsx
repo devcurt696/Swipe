@@ -40,7 +40,7 @@ const Profile = () => {
           <img 
             src={currentUser.imageUrl || "/assets/icons/profile-placeholder.svg"} 
             alt="profile"
-            className='w-28 h-28 lg:w-36 rounded-full' 
+            className='w-28 h-28 lg:w-36 lg:h-36 rounded-full' 
           />
           <div className='flex flex-col flex-1 justify-between md:mt-2'>
             <div className='flex flex-col w-full'>
@@ -98,9 +98,9 @@ const Profile = () => {
             Posts
           </Link>
           <Link
-            to={`profile/${id}/liked-posts`}
+            to={`/profile/${id}/liked-posts`}
             className={`profile-tab rounded-r-lg ${
-              pathname === `/profile/${id}/liked-posts` && "!bg-dark-3"
+              pathname === `/profile/liked-posts` && "!bg-dark-3"
             }`}
           >
             <img src="/assets/icons/like.svg" alt="like" height={20} width={20} />
