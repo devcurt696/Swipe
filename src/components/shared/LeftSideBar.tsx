@@ -49,7 +49,7 @@ const LeftSideBar = () => {
               const isActive = pathname === link.route;
               return (
                 <li className={`leftsidebar-link group ${
-                  isActive && 'bg-primary-500'
+                  isActive && 'bg-blue-500'
                 }`} key={link.label}>
                   <NavLink 
                     to={link.route}

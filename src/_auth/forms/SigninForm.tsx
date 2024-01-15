@@ -105,7 +105,7 @@ const SigninForm = () => {
 
           <p className="text-sm-regular text-light-2 text-center mt-2">
               Don't have an account?
-              <Link to="sign-up" className="text-primary-500 text-sm-semibold ml-1">Sign Up</Link>
+              <Link to="/sign-up" className="text-primary-500 text-sm-semibold ml-1">Sign Up</Link>
           </p>
         </form>
       </div>
