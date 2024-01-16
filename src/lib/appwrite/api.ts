@@ -64,6 +64,7 @@ export async function signInAccount(user: {
 }
 
 export async function getUsers(limit?: number) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const queries: any[] = [Query.orderDesc("$createdAt")];
 
   if (limit) {
@@ -348,8 +349,9 @@ export async function createPost(post: INewPost) {
     }
   }
 
-  export async function getInfinitePosts({ pageParam }: { pageParam:  number}) {
-    const queries: any[] = [Query.orderDesc('$updatedAt'), Query.limit(10)];
+  export async function getInfinitePosts({ pageParam }: { pageParam:  number }) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const queries: any[] = [Query.orderDesc('$updatedAt'), Query.limit(9)];
 
     if (pageParam) {
       queries.push(Query.cursorAfter(pageParam.toString()));

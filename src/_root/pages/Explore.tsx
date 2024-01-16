@@ -9,20 +9,22 @@ import { useInView } from 'react-intersection-observer';
 
 type SearchResultsProps = {
   isSearchFetching: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   searchedPosts: any;
 }
 
 const SearchResults = ({ isSearchFetching, searchedPosts }: SearchResultsProps) => {
-  if (isSearchFetching) return <LoaderImage />;
-
-  if (searchedPosts && searchedPosts.documents.length > 0) {
-      return (
-          <GridPostList posts={searchedPosts.documents}/>
-      );
+  if (isSearchFetching) {
+    return <LoaderImage />; 
+  } else if (searchedPosts && searchedPosts.documents.length > 0) {
+    return (
+      <GridPostList posts={searchedPosts.documents}/>
+    );
+  } else {
+    return (
+      <p className='text-light-4 text-center w-full'>No results found</p>
+    )
   }
-return (
-  <p className='text-light-4 text-center w-full'>No results found</p>
-)
 }
 
 
@@ -35,7 +37,7 @@ const Explore = () => {
   
   useEffect(() => {
     if (inView && !searchVal) fetchNextPage();
-  }, [inView, searchVal])
+  }, [inView, searchVal, fetchNextPage])
 
   if (!posts) {
     return (
@@ -87,7 +89,8 @@ const Explore = () => {
           />
         ) : shouldShowPosts ? (
           < p className='text-light-4 mt-10 text-center w-full'>End of Posts</p>
-        ) : posts.pages.map((item, index) => (
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ) : posts.pages.map((item: any, index) => (
           <GridPostList key={`page-${index}`} posts={item.documents} />
         ))}
       </div>
