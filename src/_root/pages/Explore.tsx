@@ -1,11 +1,30 @@
 import GridPostList from '@/components/shared/GridPostList';
 import LoaderImage from '@/components/shared/LoaderImage';
-import SearchResults from '@/components/shared/SearchResults';
+
 import { Input } from '@/components/ui/input'
 import useDebounce from '@/hooks/useDebounce';
 import { useGetPosts, useSearchPosts } from '@/lib/react-query/queriesandMutations';
 import { useState, useEffect } from 'react'
 import { useInView } from 'react-intersection-observer';
+
+type SearchResultsProps = {
+  isSearchFetching: boolean;
+  searchedPosts: any;
+}
+
+const SearchResults = ({ isSearchFetching, searchedPosts }: SearchResultsProps) => {
+  if (isSearchFetching) return <LoaderImage />;
+
+  if (searchedPosts && searchedPosts.documents.length > 0) {
+      return (
+          <GridPostList posts={searchedPosts.documents}/>
+      );
+  }
+return (
+  <p className='text-light-4 text-center w-full'>No results found</p>
+)
+}
+
 
 const Explore = () => {
   const { ref, inView } = useInView();
@@ -27,8 +46,8 @@ const Explore = () => {
   }
 
   const shouldShowSearchResults = searchVal !== '';
-  const shouldShowPosts =  !shouldShowSearchResults && posts.pages.every(
-    (item) => item.documents.length === 0);
+  const shouldShowPosts =  !shouldShowSearchResults && 
+    posts.pages.every((item) => item?.documents.length === 0);
 
   return (
     <div className='explore-container'>
